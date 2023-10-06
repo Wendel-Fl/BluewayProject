@@ -19,21 +19,7 @@ public class UserController {
     @Autowired
     private final UserServiceImpl userService;
 
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<User> getUserById(
-            @PathVariable("id") String id
-    ) throws UserException {
-        User user = userService.getUserById(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
-    @PostMapping(path = "/cadastrar-usuario")
+    @PostMapping(path = "/create")
     public ResponseEntity<User> addUser(
             @RequestBody User user
     ) throws UserException {
