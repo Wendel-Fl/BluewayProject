@@ -42,3 +42,6 @@
     "vote": "vote" (É necessário usar a palavra vote)
 }
 ```
+
+## Link deploy
+https://blueway-401102.uc.r.appspot.com/
