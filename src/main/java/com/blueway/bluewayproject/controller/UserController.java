@@ -32,7 +32,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/cadastrarUsuario")
+    @PostMapping(path = "/cadastrar-usuario")
     public ResponseEntity<User> addUser(
             @RequestBody User user
     ) {

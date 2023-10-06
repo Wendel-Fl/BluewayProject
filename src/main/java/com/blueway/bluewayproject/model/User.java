@@ -1,6 +1,7 @@
 package com.blueway.bluewayproject.model;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class User {
 
     @Size(min = 3, max = 50, message = "Name must have between 3 and 50 characters")
     @NotNull(message = "Name must not be null")
+    @Pattern(regexp = "^[A-Z]+(.)*")
     private String name;
 
     @Size(min = 11, max = 11, message = "CPF must have 11 characters")
