@@ -1,7 +1,7 @@
 package com.blueway.bluewayproject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -22,17 +22,13 @@ public class User {
     private String id;
 
     @Size(min = 3, max = 50, message = "Name must have between 3 and 50 characters")
-    @NotNull(message = "Name must not be null")
+    @NotBlank(message = "Name must not be null")
     @Pattern(regexp = "^[A-Z]+(.)*")
     private String name;
 
     @Size(min = 11, max = 11, message = "CPF must have 11 characters")
-    @NotNull(message = "CPF must not be null")
+    @NotBlank(message = "CPF must not be null")
     @CPF(message = "CPF must be valid")
     private String cpf;
 
-    public User(String name, String cpf) {
-        this.name = name;
-        this.cpf = cpf;
-    }
 }

@@ -36,7 +36,7 @@ public class UserController {
     @PostMapping(path = "/cadastrar-usuario")
     public ResponseEntity<User> addUser(
             @RequestBody User user
-    ) {
+    ) throws UserException {
         User newUser = userService.addUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }

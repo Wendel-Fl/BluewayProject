@@ -10,10 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -26,15 +23,29 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public Rating vote(Rating rating) throws RatingException {
+        String vote = "vote";
+
         Optional<Rating> ratingOptional = ratingRepository.findByUser(rating.getUser());
         Optional<User> userOptional = Optional.ofNullable(userRepository.findByCpf(rating.getUser().getCpf()));
 
         if (ratingOptional.isPresent()) {
-            throw new RatingException("User already voted.");
+            throw new RatingException("Usuário já votou.");
         }
 
         if (userOptional.isEmpty()) {
-            throw new RatingException("User does not exist.");
+            throw new RatingException("Usuário não existe.");
+        }
+
+        if (rating.getVote() == null || !rating.getVote().equals(vote)) {
+            throw new RatingException("Voto inválido.");
+        }
+
+        if (rating.getRealEstate() == null) {
+            throw new RatingException("Imóvel não pode ser nulo.");
+        }
+
+        if (rating.getUser() == null) {
+            throw new RatingException("Usuário não pode ser nulo.");
         }
 
         return ratingRepository.save(rating);

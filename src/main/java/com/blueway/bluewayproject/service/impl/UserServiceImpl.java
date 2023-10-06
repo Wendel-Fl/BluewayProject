@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,12 +25,18 @@ public class UserServiceImpl implements UserService {
     public User getUserById(String id) throws UserException {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserException(
-                        "User with id " + id + " does not exist."
+                        "Usuário com id " + id + " não existe."
                 ));
     }
 
     @Override
-    public User addUser(User user) {
+    public User addUser(User user) throws UserException {
+        Optional<User> userOptional = Optional.ofNullable(userRepository.findByCpf(user.getCpf()));
+
+        if (userOptional.isPresent()) {
+            throw new UserException("Usuário já existe.");
+        }
+
         return userRepository.save(user);
     }
 }

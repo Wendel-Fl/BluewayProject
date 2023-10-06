@@ -20,13 +20,6 @@ public class RatingController {
     @Autowired
     private final RatingServiceImpl ratingService;
 
-    @PostMapping(path = "/vote")
-    public ResponseEntity<Rating> vote(@RequestBody Rating rating) throws RatingException {
-        Rating newRating = ratingService.vote(rating);
-        return new ResponseEntity<>(newRating, HttpStatus.CREATED);
-    }
-
-
     @GetMapping("/status")
     public ResponseEntity<VotingStatus> getTotalVotes() {
         long totalVotes = ratingService.getTotalVotes();
@@ -35,6 +28,12 @@ public class RatingController {
         VotingStatus response = new VotingStatus(totalVotes, votesByRealEstate);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/vote")
+    public ResponseEntity<Rating> vote(@RequestBody Rating rating) throws RatingException {
+        Rating newRating = ratingService.vote(rating);
+        return new ResponseEntity<>(newRating, HttpStatus.CREATED);
     }
 
 }
