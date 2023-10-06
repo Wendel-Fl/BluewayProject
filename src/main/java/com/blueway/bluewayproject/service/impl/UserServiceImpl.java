@@ -1,5 +1,6 @@
 package com.blueway.bluewayproject.service.impl;
 
+import com.blueway.bluewayproject.exceptions.UserException;
 import com.blueway.bluewayproject.model.User;
 import com.blueway.bluewayproject.repository.UserRepository;
 import com.blueway.bluewayproject.service.UserService;
@@ -20,9 +21,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(String id) {
+    public User getUserById(String id) throws UserException {
         return userRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException(
+                .orElseThrow(() -> new UserException(
                         "User with id " + id + " does not exist."
                 ));
     }

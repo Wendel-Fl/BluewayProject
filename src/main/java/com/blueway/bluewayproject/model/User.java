@@ -1,5 +1,6 @@
 package com.blueway.bluewayproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -17,6 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
     @Id
+    @JsonIgnore
     private String id;
 
     @Size(min = 3, max = 50, message = "Name must have between 3 and 50 characters")

@@ -1,5 +1,6 @@
 package com.blueway.bluewayproject.service.impl;
 
+import com.blueway.bluewayproject.exceptions.RatingException;
 import com.blueway.bluewayproject.model.Rating;
 import com.blueway.bluewayproject.model.User;
 import com.blueway.bluewayproject.repository.RatingRepository;
@@ -24,16 +25,16 @@ public class RatingServiceImpl implements RatingService {
     private UserRepository userRepository;
 
     @Override
-    public Rating vote(Rating rating) {
+    public Rating vote(Rating rating) throws RatingException {
         Optional<Rating> ratingOptional = ratingRepository.findByUser(rating.getUser());
         Optional<User> userOptional = Optional.ofNullable(userRepository.findByCpf(rating.getUser().getCpf()));
 
         if (ratingOptional.isPresent()) {
-            throw new IllegalStateException("User already voted.");
+            throw new RatingException("User already voted.");
         }
 
         if (userOptional.isEmpty()) {
-            throw new IllegalStateException("User does not exist.");
+            throw new RatingException("User does not exist.");
         }
 
         return ratingRepository.save(rating);

@@ -16,7 +16,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Rating {
 
     @Id
-    @JsonIgnore
     private String id;
 
     @NotNull(message = "User must not be null")

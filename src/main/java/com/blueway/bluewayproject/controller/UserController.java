@@ -1,5 +1,6 @@
 package com.blueway.bluewayproject.controller;
 
+import com.blueway.bluewayproject.exceptions.UserException;
 import com.blueway.bluewayproject.model.User;
 import com.blueway.bluewayproject.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class UserController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<User> getUserById(
             @PathVariable("id") String id
-    ) {
+    ) throws UserException {
         User user = userService.getUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

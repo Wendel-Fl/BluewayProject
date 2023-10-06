@@ -1,5 +1,6 @@
 package com.blueway.bluewayproject.controller;
 
+import com.blueway.bluewayproject.exceptions.RatingException;
 import com.blueway.bluewayproject.model.Rating;
 import com.blueway.bluewayproject.model.VotingStatus;
 import com.blueway.bluewayproject.service.impl.RatingServiceImpl;
@@ -20,7 +21,7 @@ public class RatingController {
     private final RatingServiceImpl ratingService;
 
     @PostMapping(path = "/vote")
-    public ResponseEntity<Rating> vote(@RequestBody Rating rating) {
+    public ResponseEntity<Rating> vote(@RequestBody Rating rating) throws RatingException {
         Rating newRating = ratingService.vote(rating);
         return new ResponseEntity<>(newRating, HttpStatus.CREATED);
     }
